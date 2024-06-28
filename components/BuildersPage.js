@@ -3,7 +3,6 @@ import { ethers } from 'ethers';
 import Spinner from './Spinner';
 import Button from './Button';
 import Link from 'next/link';
-import { Dancing_Script } from 'next/font/google';
 import { usePrivy, useWallets } from '@privy-io/react-auth';
 import buildersABI from '../lib/buildersABI.json';
 import { processFetchedTemplate } from '../lib/notebooks.js';
@@ -13,7 +12,6 @@ import { getCommunityWritings } from '../lib/irys.js';
 const BUILDERS_NOTEBOOKS_CONTRACT_ADDRESS =
   '0xA06742b4018aec4602C3296D3CAcF0159F5234E8';
 
-const dancingScript = Dancing_Script({ weight: '400', subsets: ['latin'] });
 
 function BuildersPage() {
   const router = useRouter();
@@ -100,7 +98,7 @@ const Notebook = ({ text }) => {
   return (
     <div
       id='notebook-paper'
-      className={`${dancingScript.className} text-2xl pt-7 text-left `}
+      className={` text-2xl pt-7 text-left `}
     >
       <div id='content'>
         <div class='hipsum'>

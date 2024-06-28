@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Righteous, Dancing_Script } from "next/font/google";
+import { Righteous } from "next/font/google";
 import Button from "./Button";
 import Image from "next/image";
 import { WebIrys } from "@irys/sdk";
@@ -30,7 +30,6 @@ function sleep(ms) {
 }
 
 const righteous = Righteous({ weight: "400", subsets: ["latin"] });
-const dancingScript = Dancing_Script({ weight: "400", subsets: ["latin"] });
 
 const DesktopWritingGame = ({
   theAsyncCastToReply = null,

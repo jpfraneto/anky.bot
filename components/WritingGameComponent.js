@@ -19,7 +19,6 @@ function sleep(ms) {
 }
 
 const righteous = Righteous({ weight: "400", subsets: ["latin"] });
-const dancingScript = Dancing_Script({ weight: "400", subsets: ["latin"] });
 
 const WritingGameComponent = ({
   notebookType,
@@ -290,7 +289,7 @@ const WritingGameComponent = ({
               right: `${text && "0"}%`,
               transition: "top 1s, bottom 1s, left 1s, right 1s", // smooth transition over 1 second
             }}
-            className={`${dancingScript.className} ${
+            className={`${
               text ? "md:aspect-video md:flex w-full" : "w-4/5 md:w-3/5 h-48"
             } p-4 text-white ${
               time > 2 && "opacity-80"

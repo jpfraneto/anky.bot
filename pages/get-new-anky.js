@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Button from '../components/Button';
-import { Dancing_Script } from 'next/font/google';
 import Spinner from '../components/Spinner';
 import WritingGame from '../components/WritingGame';
 import { useRouter } from 'next/router';
 import { getAnkyFromWriting } from '../lib/backend';
 
-const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400'] });
 
 const GetNewAnky = () => {
   const router = useRouter();
