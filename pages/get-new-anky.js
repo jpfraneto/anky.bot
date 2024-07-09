@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Button from '../components/Button';
-import Spinner from '../components/Spinner';
+  import Spinner from '../components/Spinner';
 import WritingGame from '../components/WritingGame';
 import { useRouter } from 'next/router';
 import { getAnkyFromWriting } from '../lib/backend';
