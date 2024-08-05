@@ -669,7 +669,7 @@ const DesktopWritingGame = ({
       console.log('THE CAST RESPONSE IS: ', castResponse)
 
       setDisplayWritingGameLanding(false);
-      router.push(`/cast/${castResponse?.hash}`);
+      router.push(`/i/${castResponse?.responseFromIrys || irysResponseCid}`);
     } catch (error) {
       console.log(
         "There was an error in the handle finish session function",
