@@ -608,7 +608,7 @@ const GlobalApp = ({ alchemy, loginResponse }) => {
             className="h-full"
             style={{
               backgroundImage:
-                `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/${isMobile ? "blood_mobile1.jpeg" : "blood1.png"}')`,
+                `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/blood1.jpg')`,
               backgroundColor: "black",
               backgroundPosition: "center center",
               backgroundSize: "cover",
