@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import {  Righteous } from "next/font/google";
 import axios from "axios";
+import { getAnkyverseDay, getAnkyverseQuestion } from "../lib/ankyverse";
 import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
 import { PrivyWagmiConnector } from "@privy-io/wagmi-connector";
 import { base } from "@wagmi/chains";
@@ -19,6 +20,9 @@ import { initializeDB } from "../lib/idbHelper";
 import { Network, Alchemy } from "alchemy-sdk";
 
 const configureChainsConfig = configureChains([base], [publicProvider()]);
+
+const ankyverseToday = getAnkyverseDay(new Date());
+const ankyverseImage = getAnkyverseImage(ankyverseToday.wink);
 
 const settings = {
   apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
@@ -175,7 +179,7 @@ function MyApp({ Component, pageProps }) {
           content="https://anky.bot/images/touch/homescreen168.png"
         />
         <meta property="fc:frame" content="vNext" />
-        <meta property="fc:frame:image" content="https://raw.githubusercontent.com/jpfraneto/images/main/life.jpeg" />
+        <meta property="fc:frame:image" content={ankyverseImage} />
         <meta name="twitter:creator" content="@kithkui" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Anky" />
