@@ -27,6 +27,7 @@ var options = {
 
 const ReadIrysPage = ({ setShow }) => {
   const router = useRouter();
+  const {castHash} = router.query;
   const { authenticated, login } = usePrivy();
   const [thisWriting, setThisWriting] = useState(null);
   const [loadingPage, setLoadingPage] = useState(true);
@@ -196,7 +197,7 @@ const ReadIrysPage = ({ setShow }) => {
             buttonText={copyText}
             buttonColor="bg-green-600 mx-2 w-32 text-center"
           />
-          {router?.params?.castHash && <Link href={`https://www.warpcast.com/ankysync/${router.params.castHash}`} passHref>
+          {router?.params?.castHash && <Link href={`https://www.warpcast.com/@anky.eth/${router.params.castHash}`} passHref>
             <Button
               buttonText='open on warpcast'
               buttonColor="bg-purple-600 w-48 text-center"

@@ -25,13 +25,14 @@ var options = {
 const ReadCastPage = () => {
   const router = useRouter();
   const { farcasterUser, userDatabaseInformation } = useUser();
-  const { id } = router.query;
+  const { id, castHash } = router.query;
   const apiRoute =
     self.location.hostname === "localhost"
       ? "http://localhost:3000"
       : "https://ankysync.onrender.com";
 
   const [cast, setCast] = useState();
+  const [castHashFromQuery, setCastHashFromQuery] = useState(castHash);
   const { authenticated, login } = usePrivy();
   const [castInfo, setCastInfo] = useState({});
   const [decodedCast, setDecodedCast] = useState(null);

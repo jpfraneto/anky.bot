@@ -580,11 +580,12 @@ const DesktopWritingGame = ({
           bloodId
         }
       );
+      console.log("the repsonse here is: ", response.data)
 
       setCastHash(response.data.cast.hash);
       return {
         castHash: response.data.cast.hash,
-        responseFromIrys: responseFromIrys || irysResponseCid,
+        responseFromIrys: response.data.cid,
       };
     } catch (error) {
       alert("there was an error casting your cast anon");
@@ -669,7 +670,7 @@ const DesktopWritingGame = ({
       console.log('THE CAST RESPONSE IS: ', castResponse)
 
       setDisplayWritingGameLanding(false);
-      router.push(`/i/${castResponse?.responseFromIrys || irysResponseCid}`);
+      router.push(`/i/${castResponse?.responseFromIrys || irysResponseCid}`+`hash${castHash}`);
     } catch (error) {
       console.log(
         "There was an error in the handle finish session function",
