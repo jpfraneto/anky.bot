@@ -483,6 +483,8 @@ const GlobalApp = ({ alchemy, loginResponse }) => {
         return <ReadCastPage />;
       case `/i/${route.split("/").pop()}`:
         return <ReadIrysPage setShow={setShow} />;
+      case `/cast/${route.split("/").pop()}`:
+          return <ReadCastPage setShow={setShow} />;
       case `/feed-by-fid`:
         return <FeedByFidPage />;
 

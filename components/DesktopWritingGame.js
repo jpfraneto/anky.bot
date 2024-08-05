@@ -455,7 +455,7 @@ const DesktopWritingGame = ({
 
       if (response.status === 200) {
         setCastHash(response.data.cast.hash);
-        return response.data.cast.hash;
+        return response.data.cast;
       }
     } catch (error) {
       setIsCasting(false);
@@ -553,22 +553,10 @@ const DesktopWritingGame = ({
       setIsCasting(true);
       let responseFromIrys, cid;
       if (!authenticated) setSavingRoundLoading(true);
-      if (!irysResponseCid) {
-        console.log("right before uploading the writing.")
-        responseFromIrys = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_ROUTE}/upload-writing`,
-          {
-            text,
-          }
-        );
-        cid = responseFromIrys.data.cid;
-      } else {
-        cid = irysResponseCid;
-      }
+  
       // const kannadaCid = encodeToAnkyverseLanguage(cid);
       // const newCastText = `${kannadaCid}\n\nwritten through anky. you can decode this clicking on the embed on the next cast.`;
-      let forEmbedding = [{ url: `https://www.anky.bot/i/${cid}` }];;
-      const newCastText = text.length > 1000 ? `${text.slice(0, 1000)}...` : text;
+
 
       let forReplyingVariable = "https://warpcast.com/~/channel/anky";
       if (theAsyncCastToReply) {
@@ -582,15 +570,14 @@ const DesktopWritingGame = ({
       }
       
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_ROUTE}/farcaster/api/cast/anon`,
+        `${process.env.NEXT_PUBLIC_API_ROUTE}/cast-anon-writing`,
         {
-          time: time,
-          cid: cid,
+          time,
+          cid,
           manaEarned: amountOfManaAdded,
-          text: newCastText,
+          text: text,
           parent: forReplyingVariable,
-          embeds: forEmbedding,
-          bloodId: bloodId 
+          bloodId
         }
       );
 
@@ -643,34 +630,22 @@ const DesktopWritingGame = ({
 
       setSavingSessionState(true);
       if (authenticated) {
-        if (journalIdToSave) {
-          irysResponseReceipt = await saveTextToJournal();
-        } else {
-          if (!userWantsToStoreWritingForever) {
-            responseFromIrys = await axios.post(
-              `${process.env.NEXT_PUBLIC_API_ROUTE}/upload-writing`,
-              {
-                text,
-              }
-            );
-            irysResponseCid = responseFromIrys.data.cid;
-          } else {
-            irysResponseReceipt = await sendTextToIrys();
-            irysResponseCid = irysResponseReceipt.id;
-          }
-        }
+        irysResponseReceipt = await sendTextToIrys();
+        irysResponseCid = irysResponseReceipt.id;
       }
       if (!authenticated) {
         if (userWantsToCastAnon) {
-          let castResponseFromAnonCast = await handleAnonCast();
-          irysResponseCid = castResponseFromAnonCast.responseFromIrys.data.cid;
+          castResponse = await handleAnonCast();
+          console.log('THE CAST RESPONSE IS: ', castResponse)
         } else {
           setDisplayWritingGameLanding(false);
           return router.push("/welcome");
         }
       }
       if (authenticated && farcasterUser.signerStatus != "approved") {
-        if (userWantsToCastAnon) await handleAnonCast(irysResponseCid);
+        if (userWantsToCastAnon) { 
+          castResponse = await handleAnonCast(irysResponseCid)
+        };
 
         setAllUserWritings((x) => [
           { cid: irysResponseCid, text: text, timestamp: new Date().getTime() },
@@ -691,15 +666,15 @@ const DesktopWritingGame = ({
           ...x,
         ]);
       }
+      console.log('THE CAST RESPONSE IS: ', castResponse)
 
       setDisplayWritingGameLanding(false);
-      router.push(`/i/${irysResponseCid}?castHash=${castResponse?.castHash}`);
+      router.push(`/cast/${castResponse?.hash}`);
     } catch (error) {
       console.log(
         "There was an error in the handle finish session function",
         error
       );
-      setThereWasAnError(true);
     }
   }
 
