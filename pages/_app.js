@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import {  Righteous } from "next/font/google";
 import axios from "axios";
-import { getAnkyverseDay, getAnkyverseQuestion } from "../lib/ankyverse";
+import { getAnkyverseDay, getAnkyverseImage } from "../lib/ankyverse";
 import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
 import { PrivyWagmiConnector } from "@privy-io/wagmi-connector";
 import { base } from "@wagmi/chains";
